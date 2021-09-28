@@ -1,0 +1,54 @@
+#访问地址为:127.0.0.1:24080
+server:
+ port: 24080
+ servlet:
+  context-path: /
+
+#配置spring的自动数据源配置
+spring:   
+  #mysql配置
+  datasource:
+    #数据源驱动类型
+    type: com.alibaba.druid.pool.DruidDataSource
+    #?后的那串要记得加，不然会报时区错误
+    url: jdbc:mysql://127.0.0.1:3306/springboot-activity5-demo-activity?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 83956276
+    #数据源驱动类名
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #druid连接池配置
+    #参考链接：https://cloud.tencent.com/developer/article/1609334
+    # 初始化大小，最小，最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间(毫秒)
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置有一个连接在连接池中的最小生存时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+  
+  #activity配置项  
+  activiti:
+    # 建表规则
+    # false 默认值。在启动时会对比数据库中保存的版本，如果没有表或版本不匹配则抛出异常。生产环境常用
+    # true 对activiti所有表进行更新操作，不存在则自动创建。开发常用
+    # create_drop 在启动时创建，在关闭时删除（必须手动关闭引擎，才能删除）。单元测试常用
+    # drop_create 在启动时删除原来的旧表，然后在创建新表（不需要手动关闭引擎）
+    database-schema-update: true
+    # 启动的时候是否自动部署流程
+    check-process-definitions: false
+    # 历史数据
+    # none 不保存任何的历史数据，因此，在流程执行过程中，这是最高效的
+    # activity  级别高于none，保存流程实例与流程行为，其他数据不保存
+    # audit  除activity级别会保存的数据外，还会保存全部的流程任务及其属性。audit为history的默认值
+    # full  保存历史数据的最高级别，除了会保存audit级别的数据外，还会保存其他全部流程相关的细节数据，包括一些流程参数等
+    history-level: audit
+    # 不生成历史表 activiti6默认启用,activiti7默认关闭
+    db-history-used: true
+    

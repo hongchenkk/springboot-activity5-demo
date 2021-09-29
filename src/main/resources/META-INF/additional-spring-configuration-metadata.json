@@ -48,5 +48,15 @@
     "name": "spring.datasource.testOnReturn",
     "type": "java.lang.String",
     "description": "A description for 'spring.datasource.testOnReturn'"
+  },
+  {
+    "name": "spring.datasource.maxPoolPreparedStatementPerConnectionSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.maxPoolPreparedStatementPerConnectionSize'"
+  },
+  {
+    "name": "spring.datasource.poolPreparedStatements",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.poolPreparedStatements'"
   }
 ]}
